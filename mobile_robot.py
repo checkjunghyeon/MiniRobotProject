@@ -39,11 +39,11 @@ class MobileRobot(Robot):
         self.battery -= battery_cost
         print(f"{self.name} moved to ({self.x}, {self.y}). Battery={self.battery}%")
 
-    def increase_speed(self):
-        self.speed += 1
+    def increase_speed(self, n):
+        self.speed += n
 
-    def decrease_speed(self):
-        self.speed += 1
+    def decrease_speed(self, n):
+        self.speed -= n
 
     def operate(self) -> None:
         """이동 로봇의 기본 동작: 이동"""
