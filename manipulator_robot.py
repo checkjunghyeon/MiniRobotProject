@@ -3,7 +3,15 @@ from robot import *
 
 # 조작 가능한 로봇 (ManipulatorRobot)
 class ManipulatorRobot(Robot):
-    ALLOWED_STATUSES = {RobotStatus.IDLE, RobotStatus.Moving}  # CHARGING 제외
+    ALLOWED_STATUSES = {
+        RobotStatus.IDLE, 
+        RobotStatus.Moving, 
+        RobotStatus.ERROR, 
+        RobotStatus.EMERGENCY_STOP,
+        CoBotStatus.PICKING, 
+        CoBotStatus.HOLDING, 
+        CoBotStatus.PLACING, 
+        }  # CHARGING 제외
 
     def __init__(self, robot_id: str, name: str, model: str):
         super().__init__(robot_id, name, model)
