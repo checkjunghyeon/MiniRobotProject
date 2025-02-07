@@ -2,11 +2,11 @@ from mobile_robot import *
 from manipulator_robot import *
 from random import sample
 
-def move_n_times(robot, n):
+def move_n_times(r, n):
     for _ in range(n):
         dx, dy = sample(range(1, 5), 2)
-        robot.move(dx, dy)             # (x + dx, y + dy) 방향으로 이동
-        print(robot.get_info())        # 이동 후 위치 및 배터리 확인
+        r.move(dx, dy)             # (x + dx, y + dy) 방향으로 이동
+        print(r.get_info())        # 이동 후 위치 및 배터리 확인
         print()
 
 def test_mobile_robot():
@@ -24,7 +24,7 @@ def test_mobile_robot():
     robot1.charge()  
     robot1.log_info()               # 충전 후 배터리 확인
     print()
-    
+    ㅉ
     print('[case 4] 속도 증감 테스트')
     robot1.increase_speed(5)        # 속도 증가
     move_n_times(robot1, 2)      # 이동

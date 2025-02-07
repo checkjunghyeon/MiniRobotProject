@@ -10,11 +10,9 @@ def main():
     print(amr.get_info())
     print("-" * 50)
 
-    print("AMR-1 is starting its patrol...")
+    amr.operate(15) # log 독립 후 매개변수(name, message) 손 봐야 함(지금 겁나 꼬임 ㅋㅋ ㅠ)
 
-    amr.operate(5)
-
-    amr.operate()
+    amr.operate()  # 단순 이동
 
 if __name__ == "__main__":
     main()

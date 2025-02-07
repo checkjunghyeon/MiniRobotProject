@@ -2,7 +2,7 @@
 # (1) 캡슐화
 # (2) 의존성 역전 원칙: MobileRobot은 BatteryManager라는 추상 개념에 의존, BatteryManager의 배터리 관리 세부 방식에 대해서는 신경쓰지 않음
 
-class BatteryManager():
+class BatteryManager:
     def __init__(self, init_battery=100):
         # battery 변수 private 선언
         # 정보 은닉, 캡슐화 - 데이터 무결성 보호, 불필요한 변경 방지
@@ -15,10 +15,10 @@ class BatteryManager():
     def set_battery_status(self, amount: int):
         """ 배터리 상태 설정 """
         if amount < 0:
-            print("Error: Battery status cannot be negative.")
+            print("[Error] Battery status cannot be negative.")
             return
         self.__battery = amount
-        print(f"Battery status set to {self.__battery}%.")
+        # print(f"Battery status set to {self.__battery}%.")
 
     def charge(self):
         """ 배터리 충전 """
@@ -31,6 +31,6 @@ class BatteryManager():
         if current_battery >= amount:
             self.set_battery_status(current_battery - amount)
         else:
-            print(f"Warning: Not enough battery to discharge {amount}%.")
+            print(f"[Warning] Not enough battery to discharge {amount}%.")
             self.set_battery_status(0)
 

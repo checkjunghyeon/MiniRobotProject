@@ -10,8 +10,13 @@ class Robot:
         self.name = name
         self.model = model
         self.status = RobotStatus.IDLE
-
         self.logger = Logger()
+
+    def log_debug(self, message):
+        self.logger.log_debug(self.name, message)
+
+    def log_info(self, message):
+        self.logger.log_info(self.name, message)
 
     def set_status(self, new_status: RobotStatus) -> None:
         """로봇의 상태를 안전하게 변경"""
@@ -19,7 +24,7 @@ class Robot:
             print(f"[ERROR] {new_status.value} is not a valid status for {self.__class__.__name__}.")
             return
         self.status = new_status
-        self.logger.log_debug(name=self.name, message=f"Status changed: {self.status} → {new_status}")
+        self.logger.log_info(name=self.name, message=f"Status changed: {self.status} → {new_status}")
 
     def operate(self) -> None:
         """기본 로봇은 작업 수행 기능이 없음"""
