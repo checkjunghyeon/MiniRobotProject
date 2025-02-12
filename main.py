@@ -14,7 +14,7 @@ def main():
     ur10 = Cobot("002", "Cobot-1", "Universal Robots", joint_count=6)
     initialize(ur10)
 
-    amr.operate(5)  # 순찰
+    amr.operate(3)  # n회 순찰
     amr.operate()  # 단순 이동
 
     obs_pos = [10, 20, 30]

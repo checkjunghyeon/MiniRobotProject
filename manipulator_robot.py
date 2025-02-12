@@ -49,7 +49,7 @@ class Cobot(ManipulatorRobot):
     def move_joint(self, joint_idx: int, angle: float) -> None: 
         if 0 <= joint_idx < len(self.joint_angles):
             self.joint_angles[joint_idx] = angle
-            print(f"       {self.name} joint[{joint_idx}] moved to {angle}°.")
+            print(f"       joint[{joint_idx}] moved to {angle}°.")
         else:
             print(f"[ERROR] Invalid joint index {joint_idx}.")
 
@@ -110,12 +110,12 @@ class Cobot(ManipulatorRobot):
         dx = 50 if direction == "left" else -50
         self.move_obstacle_to(x + dx, y, z)
         self.release_obstacle()
-        self.log_info(f"{self.name} has cleared the obstacle to the {direction}.\n")
+        self.log_info(f"{self.name} has cleared the obstacle in the {direction} direction.\n")
 
     def operate(self, *args) -> None:
         """협동 로봇의 동작: 작업자 지원"""
         if self.power_on:
-            self.log_info(f"Assisting human workers.")
+            self.log_info(f"Assisting mobile robots.")
             self.remove_obstacle(*args)
         else:
             print(f"[ERROR] {self.name} is OFF.")
