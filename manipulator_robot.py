@@ -121,7 +121,7 @@ class Cobot(ManipulatorRobot):
             print(f"[ERROR] {self.name} is OFF.")
 
 
-# 모듈 테스트 코드
+# 모듈 테스트
 if __name__ == "__main__":
     ur10 = Cobot("002", "Cobot-1", "Universal Robots", joint_count=6)
     ur10.power_up()

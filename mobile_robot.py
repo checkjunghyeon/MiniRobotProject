@@ -112,7 +112,7 @@ class MobileRobot(Robot):
         return (f"{super().get_info()}, Battery={self.battery_manager.get_battery_status()}%, "
                 f"Speed={self.speed}, Pos=({self.x}, {self.y})")
 
-# 모듈 테스트 코드
+# 모듈 테스트
 if __name__ == "__main__":
     amr = MobileRobot("001", "AMR-1", "Jackal")
     amr.operate(15)
