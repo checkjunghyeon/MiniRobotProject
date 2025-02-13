@@ -15,17 +15,6 @@
 ### 🤖 협동 로봇 (Cobot)
 - **장애물 제거 기능** → `handle_obstacle(position, direction)`
 
-## 🛠 설치 방법
-### 1️⃣ **Conda 가상 환경 설정**
-```sh
-conda create -n robot-sim python=3.9  # 가상 환경 생성
-conda activate robot-sim  # 가상 환경 활성화
-```
-
-### 2️⃣ **필요한 패키지 설치**
-```sh
-pip install -r requirements.txt
-```
 
 ## 🚀 실행 방법
 ```sh
