@@ -10,17 +10,15 @@ def initialize(robot):
 # 순회/감시 로봇 상황 가정
 def main():
     amr = MobileRobot("001", "AMR-1", "Jackal")
-    initialize(amr)
     ur10 = Cobot("002", "Cobot-1", "Universal Robots", joint_count=6)
+
+    initialize(amr)
     initialize(ur10)
 
-    amr.operate(3)  # n회 순찰
-    amr.operate()  # 단순 이동
+    amr.set_cobot(ur10)
+    amr.operate(10)  # n회 순찰
 
-    obs_pos = [10, 20, 30]
-    direction = "right"
-    ur10.power_up()
-    ur10.operate(obs_pos, direction)  # 단순 이동
+    amr.operate()  # 단순 이동
 
 if __name__ == "__main__":
     main()

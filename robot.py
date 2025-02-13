@@ -18,13 +18,15 @@ class Robot:
     def log_info(self, message):
         self.logger.log_info(self.name, message)
 
-    def set_status(self, new_status: RobotStatus) -> None:
+    # RobotStatus -> Enum으로 변경
+    def set_status(self, new_status: Enum) -> None:
         """로봇의 상태를 안전하게 변경"""
         if new_status not in self.ALLOWED_STATUSES:
             print(f"[ERROR] {new_status.value} is not a valid status for {self.__class__.__name__}.")
             return
-        self.status = new_status
-        self.logger.log_info(name=self.name, message=f"Status changed: {self.status} → {new_status}")
+        if self.status != new_status:
+            self.logger.log_info(name=self.name, message=f"Status changed: {self.status.value} → {new_status.value}")
+            self.status = new_status    # 출력 이상으로 인한 위치 변경
 
     def operate(self) -> None:
         """기본 로봇은 작업 수행 기능이 없음"""

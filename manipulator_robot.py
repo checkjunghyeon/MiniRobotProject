@@ -8,7 +8,7 @@ import random
 class ManipulatorRobot(Robot):
     ALLOWED_STATUSES = {
         RobotStatus.IDLE, 
-        RobotStatus.Moving, 
+        # RobotStatus.Moving,
         RobotStatus.ERROR, 
         RobotStatus.EMERGENCY_STOP,
         CoBotStatus.PICKING, 
@@ -46,7 +46,7 @@ class Cobot(ManipulatorRobot):
         self.joint_count = joint_count
         self.grasped = False  # 장애물 흡착 여부 (흡착식 gripper 가정)
 
-    def move_joint(self, joint_idx: int, angle: float) -> None: 
+    def move_joint(self, joint_idx: int, angle: float) -> None:
         if 0 <= joint_idx < len(self.joint_angles):
             self.joint_angles[joint_idx] = angle
             print(f"       joint[{joint_idx}] moved to {angle}°.")
@@ -76,7 +76,7 @@ class Cobot(ManipulatorRobot):
     def lift_obstacle(self):
         """ 장애물 들어 올리기 """
         if self.grasped:  # 장애물 흡착 상태에서만 작동
-            self.log_info(f"Grasping the obstacle.")
+            self.log_info(f"Lifting the obstacle.")
             for i in random.sample(range(0, self.joint_count), 2):
                 self.move_joint(i, 50)  # 무작위로 2개의 관절만 이동
             time.sleep(1)
@@ -85,7 +85,6 @@ class Cobot(ManipulatorRobot):
 
     def move_obstacle_to(self, dst_x, dst_y, dst_z):
         self.log_info(f"Moving the obstacle to ({dst_x}, {dst_y}, {dst_z}).")
-
         joints = self.calculate_joint_angles(dst_x, dst_y, dst_z)
         for idx, angle in enumerate(joints):
             self.move_joint(idx, angle)
@@ -103,13 +102,25 @@ class Cobot(ManipulatorRobot):
     def remove_obstacle(self, obs_pos: list, direction: str) -> None:
         """전체 장애물 제거 과정 순차 실행"""
         x, y, z = obs_pos[0], obs_pos[1], obs_pos[2]
-        self.move_to_obstacle(x, y, z)
-        self.grasp_obstacle()
-        self.lift_obstacle()
-
         dx = 50 if direction == "left" else -50
+
+        # 장애물 위치까지 gripper 이동
+        self.set_status(CoBotStatus.PICKING)
+        self.move_to_obstacle(x, y, z)
+
+        # 장애물 집기
+        self.grasp_obstacle()
+        self.set_status(CoBotStatus.HOLDING)
+
+        # 장애물 들어올리기
+        self.lift_obstacle()
+        self.set_status(CoBotStatus.PLACING)
+
+        # 정해진 위치로 장애물 이동 및 내려놓기
         self.move_obstacle_to(x + dx, y, z)
         self.release_obstacle()
+        self.set_status(RobotStatus.IDLE)
+
         self.log_info(f"{self.name} has cleared the obstacle in the {direction} direction.\n")
 
     def operate(self, *args) -> None:
@@ -120,6 +131,11 @@ class Cobot(ManipulatorRobot):
         else:
             print(f"[ERROR] {self.name} is OFF.")
 
+    def handle_obstacle(self, obs_pos, direction):
+        """ MobileRobot의 요청을 받아 장애물 제거 """
+        self.power_up()
+        self.operate(obs_pos, direction)  # operate() 안에서 자동 실행
+        self.power_down()
 
 # 모듈 테스트
 if __name__ == "__main__":
