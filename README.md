@@ -179,36 +179,7 @@ amr.operate()  # 랜덤 이동
     ✅ `Robot` 인터페이스를 거대한 하나의 클래스로 만들지 않고, `MobileRobot`, `Cobot`으로 나눔
     
     ✅ `Sensor`, `BatteryManager` 와 같은 독립적인 클래스로 기능을 모듈화하여 필요 없는 의존성을 최소화
-    
 
-## **3️⃣ 코드 예시**
-
-
-### ✅ **1. 장애물 감지 및 협동 로봇 호출**
-
-```python
-if self.sensor.detect_obstacle():
-    print("Obstacle detected! Calling the cobot.")  
-    self.handle_obstacle()
-```
-
-### ✅ **2. 배터리 부족 시 자동 충전**
-
-```python
-if self.battery.is_low():
-    print("Low battery! Moving to charging station.")  
-    self.move_to_charging_station()
-```
-
-### ✅ **3. 객체 간 협력 (Cobot 연결)**
-
-```python
-amr = MobileRobot("001", "AMR-1", "Jackal")
-ur10 = Cobot("002", "Cobot-1", "Universal Robots", joint_count=6)
-
-amr.set_cobot(ur10)  # 협동 로봇 연결
-
-```
 
 ## 📌 추가 기능 및 개선점
 
