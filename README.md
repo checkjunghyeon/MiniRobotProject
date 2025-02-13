@@ -115,9 +115,7 @@ amr.operate()  # 랜덤 이동
 
 | **기존 예제** | **수정 후** |
 | --- | --- |
-| `operate(n_times=None)` 
-→ 이동 또는 순찰 기능 제공 | **선택적 매개변수로 유연한 이동 & 순찰 가능** 
-(`MobileRobot`의 `operate` 메소드는 이제 `n_times`와 같은 선택적 매개변수 사용) |
+| `operate(n_times=None)` → 이동 또는 순찰 기능 제공 | **선택적 매개변수로 유연한 이동 & 순찰 가능** (`MobileRobot`의 `operate` 메소드는 이제 `n_times`와 같은 선택적 매개변수 사용) |
 
 ### 🅰️ 객체 지향의 4대 원칙 만족
 
